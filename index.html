@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer’s Gallery❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+            animation: float 6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3em;
+            font-style: italic;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 0 60px;
+        }
+
+        .carousel {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            background: white;
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: autoScroll 140s linear infinite;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-1400%);
+            }
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .photo-card {
+            min-width: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            margin-right: 0;
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6em;
+            color: rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #f8f8f8;
+        }
+
+        .caption {
+            padding: 40px;
+            text-align: center;
+            background: white;
+        }
+
+        .caption h3 {
+            color: #ff6b9d;
+            margin-bottom: 12px;
+            font-size: 1.8em;
+        }
+
+        .caption p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .prev-btn {
+            left: 0;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+
+        .carousel-indicators {
+            display: none;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .message {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease 0.7s backwards;
+            margin: 0 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message h2 {
+            color: #ff6b9d;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .message p {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+                padding: 0 20px;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                padding: 0 20px;
+            }
+
+            .carousel-container {
+                padding: 0 50px;
+            }
+
+            .photo-wrapper {
+                height: 350px;
+                font-size: 4em;
+            }
+
+            .caption {
+                padding: 30px 25px;
+            }
+
+            .caption h3 {
+                font-size: 1.5em;
+            }
+
+            .caption p {
+                font-size: 1em;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+
+            .message {
+                padding: 30px 25px;
+            }
+
+            .message h2 {
+                font-size: 1.6em;
+            }
+
+            .message p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .carousel-container {
+                padding: 0 40px;
+            }
+
+            .photo-wrapper {
+                height: 280px;
+                font-size: 3em;
+            }
+
+            .caption {
+                padding: 25px 20px;
+            }
+
+            .caption h3 {
+                font-size: 1.3em;
+            }
+
+            .caption p {
+                font-size: 0.95em;
+            }
+
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .message {
+                padding: 25px 20px;
+            }
+
+            .message h2 {
+                font-size: 1.4em;
+            }
+
+            .message p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>❤️ Summer's Gallery ❤️</h1>
+            <p class="subtitle">Every picture is a treasure</p>
+        </header>
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="1.jpg" alt="Memory 1"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="2.jpg" alt="Memory 2"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="3.jpg" alt="Memory 3"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="4.jpg" alt="Memory 4"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="5.jpg" alt="Memory 5"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="6.jpg" alt="Memory 6"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="7.jpg" alt="Memory 7"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="8.jpg" alt="Memory 8"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="9.jpg" alt="Memory 9"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="10.jpg" alt="Memory 10"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="11.jpg" alt="Memory 11"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="12.jpg" alt="Memory 12"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="13.jpg" alt="Memory 13"></div>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-wrapper"><img src="14.jpg" alt="Memory 14"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-btn prev-btn" id="prevBtn">‹</button>
+            <button class="carousel-btn next-btn" id="nextBtn">›</button>
+
+            <div class="carousel-indicators" id="indicators"></div>
+        </div>
+
+        <div class="message">
+            <h2>To all visitors</h2>
+            <p>
+                Thank you for taking the time to visit Summer’s Gallery. Each photo here captures a moment, a memory, or a feeling worth treasuring. May these images bring you warmth, joy, and a little inspiration as you explore. Every visit means a lot—enjoy the gallery and the stories behind every picture. ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 800);
+
+        // Duplicate slides for seamless loop
+        const track = document.getElementById('carouselTrack');
+        const slides = Array.from(document.querySelectorAll('.photo-card'));
+        
+        slides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            track.appendChild(clone);
+        });
+    </script>
+</body>
+</html>
